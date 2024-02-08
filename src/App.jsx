@@ -17,7 +17,7 @@ function App() {
   // when the component is executed again then it will have the updated value.
   // the setSelectedTopic is a function that will be used to update the value of selectedTopic. also calling this setSelectedTopic function
   // will tell react that this component should be executed again as its value changed.
-  const [ selectedTopic, setSelectedTopic ] = useState( 'components' );
+  const [ selectedTopic, setSelectedTopic ] = useState();
 
   function handleTabButtonClick ( selectedTabButtonId ) {
     //dynamicContent = selectedTabButtonId;
@@ -34,22 +34,31 @@ function App() {
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
-            <CoreConcept image={ CORE_CONCEPTS[0].image } title={ CORE_CONCEPTS[0].title } description={ CORE_CONCEPTS[0].description }/>
+            {/* <CoreConcept image={ CORE_CONCEPTS[0].image } title={ CORE_CONCEPTS[0].title } description={ CORE_CONCEPTS[0].description }/>
             <CoreConcept { ...CORE_CONCEPTS[1] }/>
             <CoreConcept { ...CORE_CONCEPTS[2] }/>
-            <CoreConcept { ...CORE_CONCEPTS[3] }/>
+            <CoreConcept { ...CORE_CONCEPTS[3] }/> */}
+
+            {/* Dynamically create the core concept data from the array of data. */}
+
+            {
+              CORE_CONCEPTS.map( (eachCoreConceptItem)=> <CoreConcept key={eachCoreConceptItem.title} { ...eachCoreConceptItem } ></CoreConcept>)
+            }
           </ul>
         </section>
 
         <section id="examples">
           <h2>Examples</h2>
+        
           <menu>
-            <TabButton onTabButtonClick = { ()=>handleTabButtonClick('components') } >Components</TabButton>
-            <TabButton onTabButtonClick = { ()=>handleTabButtonClick('jsx') } >JSX</TabButton>
-            <TabButton onTabButtonClick = { ()=>handleTabButtonClick('props') } >Props</TabButton>
-            <TabButton onTabButtonClick = { ()=>handleTabButtonClick('state') } >State</TabButton>
+            <TabButton isSelected = {selectedTopic==='components'} onTabButtonClick = {()=>handleTabButtonClick('components')} >Components</TabButton>
+            <TabButton isSelected = {selectedTopic==='jsx'} onTabButtonClick = {()=>handleTabButtonClick('jsx')} >JSX</TabButton>
+            <TabButton isSelected = {selectedTopic==='props'} onTabButtonClick = {()=>handleTabButtonClick('props')} >Props</TabButton>
+            <TabButton isSelected = {selectedTopic==='state'} onTabButtonClick = {()=>handleTabButtonClick('state')} >State</TabButton>
           </menu>
-          {selectedTopic}
+
+          { selectedTopic === undefined ? <p>Please select a stopic of your choice.</p> :
+
           <div id="tab-content">
             <h3> { EXAMPLES[selectedTopic].title } </h3>
             <p> { EXAMPLES[selectedTopic].description } </p>
@@ -58,7 +67,10 @@ function App() {
               { EXAMPLES[selectedTopic].code } 
               </code>
             </pre>
-          </div>
+          </div> 
+
+          }
+
         </section>
 
       </main>
