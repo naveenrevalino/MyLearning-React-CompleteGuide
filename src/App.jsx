@@ -20,7 +20,6 @@ function App() {
   const [ selectedTopic, setSelectedTopic ] = useState();
 
   function handleTabButtonClick ( selectedTabButtonId ) {
-    //dynamicContent = selectedTabButtonId;
     setSelectedTopic ( selectedTabButtonId );
 }
 
