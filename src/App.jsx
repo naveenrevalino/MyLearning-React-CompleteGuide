@@ -9,6 +9,8 @@ import { EXAMPLES } from './testdata/data.js';
 
 function App() {
 
+  // New Log for test
+
   // Calling the react hook function : STATE HOOK ** most important hook in react.
   // const stateArray = useState( 'Please click a button Naveen.' );
 
